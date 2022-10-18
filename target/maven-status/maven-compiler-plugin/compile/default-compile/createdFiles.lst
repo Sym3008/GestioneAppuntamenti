@@ -1,0 +1,15 @@
+it\gestioneappuntamenti\www\GestioneAppuntamenti\Util\MailSenderComponent$1.class
+it\gestioneappuntamenti\www\GestioneAppuntamenti\model\Prenotaizoni.class
+it\gestioneappuntamenti\www\GestioneAppuntamenti\model\Uffici.class
+it\gestioneappuntamenti\www\GestioneAppuntamenti\model\All_pre_conf.class
+it\gestioneappuntamenti\www\GestioneAppuntamenti\model\Planner.class
+it\gestioneappuntamenti\www\GestioneAppuntamenti\dao\UtentiDao.class
+it\gestioneappuntamenti\www\GestioneAppuntamenti\service\UtentiService.class
+it\gestioneappuntamenti\www\GestioneAppuntamenti\ServletInitializer.class
+it\gestioneappuntamenti\www\GestioneAppuntamenti\model\Utenti.class
+it\gestioneappuntamenti\www\GestioneAppuntamenti\Util\MailSenderComponent.class
+it\gestioneappuntamenti\www\GestioneAppuntamenti\model\Settimane.class
+it\gestioneappuntamenti\www\GestioneAppuntamenti\GestioneAppuntamentiApplication.class
+it\gestioneappuntamenti\www\GestioneAppuntamenti\controller\UtentiController.class
+it\gestioneappuntamenti\www\GestioneAppuntamenti\model\Eccezioni.class
+it\gestioneappuntamenti\www\GestioneAppuntamenti\model\Giorni.class

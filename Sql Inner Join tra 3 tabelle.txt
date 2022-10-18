@@ -1,0 +1,7 @@
+CREATE VIEW all_pre_conf AS
+SELECT prenotazioni.id_pren, utenti.nome, utenti.cognome, utenti.cf, utenti.mail, utenti.cell, prenotazioni.data, prenotazioni.ora, uffici.descrizione_uff 
+FROM (((prenotazioni
+INNER JOIN utenti ON prenotazioni.id_utn=utenti.id_utn)
+    INNER JOIN planner ON prenotazioni.id_planner=planner.id_planner)
+		INNER JOIN uffici ON planner.id_uff= uffici.id_uff)
+WHERE prenotazioni.confermato = '1' ;

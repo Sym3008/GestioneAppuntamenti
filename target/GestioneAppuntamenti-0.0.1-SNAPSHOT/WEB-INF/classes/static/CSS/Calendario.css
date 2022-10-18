@@ -1,0 +1,34 @@
+.setCalendario{
+    width: 99%;
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 16px;
+    text-align: center;
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.15), 0 8px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: #d4dbdd;
+    border-radius: 10px;
+}
+.header{
+    text-align: center;
+    font-weight: 900;
+    font-size: 20px;
+    padding: 10px 30px;
+}
+table{
+  width: 100%;
+}
+a{
+    text-decoration: none;
+    color: #084298a8;
+}
+.sfondo:hover{
+    background-color: #6dd766a8;
+    /*background-color: #ff6c6c;*/
+}
+.disp{
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 15px;
+    text-align: center;
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.15), 0 8px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: #e6e6e6eb;
+    border-radius: 10px;
+}

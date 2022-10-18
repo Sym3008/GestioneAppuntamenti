@@ -1,0 +1,44 @@
+.form{
+    height: 100vh;
+}
+.scheda{
+    border-radius: 10px;
+    border-color: white;
+    border-width: 3px;
+    border-style: solid;
+    background: rgba(255,255,255,0.5);
+    padding: 10px 15%;
+}
+.account{
+    margin-top: -90px;
+}
+.account img{
+    max-height: 150px;
+}
+.img-form{
+    padding: 5px;
+    margin: 5px 0;
+    border: white 2px solid;
+    border-right: 0;
+    border-radius: 10px 0 0 10px;
+    background-color: rgba(150,150,150,0.8);
+}
+.input-form{
+    padding: 5px;
+    margin: 5px 0;
+    border: white 2px solid;
+    border-radius: 0 10px 10px 0;
+    background-color: rgba(180,180,180,0.8);
+    color: white;
+
+}
+input{
+    margin: 10px 5px;
+}
+
+.btn-form{
+    color: white;
+    background-color: rgba(20,50,200);
+    padding: 5px 40px;
+    border-radius: 10px;
+}
