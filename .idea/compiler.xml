@@ -8,13 +8,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="GestioneAppuntamenti" />
-        <module name="Biblioteca" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="Biblioteca" options="-parameters" />
       <module name="GestioneAppuntamenti" options="-parameters" />
     </option>
   </component>

@@ -31,4 +31,19 @@ public class UtentiController {
         untService.saveOrUpdateUtenti(unt);
         return "salvato";
     }
+
+    @PutMapping("/update-utenti")
+    public void updateUtenti(@RequestBody @NotNull Utenti unt){
+        untService.saveOrUpdateUtenti(unt);
+    }
+
+    @DeleteMapping("/canella-utenti")
+    public void deleteUtenti(@RequestBody @NotNull List<Utenti> unt){
+        untService.deleteUtenti(unt);
+    }
+
+    @DeleteMapping("/cancella-utente/{id}")
+    public void deleteUtenteById(@PathVariable("id") Integer id){
+        untService.deleteUtentiById(id);
+    }
 }

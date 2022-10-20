@@ -35,6 +35,9 @@ public class Utenti {
     @Column (name = "password")
     private String password;
 
+    @Column (name = "token")
+    private String token;
+
     @OneToMany (mappedBy = "unt")
     @JsonIgnore
     private List<Prenotaizoni> prenList;
