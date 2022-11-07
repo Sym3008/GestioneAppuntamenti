@@ -42,7 +42,7 @@ public class Utenti {
     @Column (name = "ip")
     private String ip;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column (name = "lastLog")
     private Date lastLog;
 

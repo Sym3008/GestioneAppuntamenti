@@ -12,7 +12,7 @@ window.addEventListener("load", function (Event) {
                 InErr(elT,elT.id);
                 event.preventDefault();
             }else {
-                console.log("-> " + elT.id + " = " + elT.value);
+                //console.log("-> " + elT.id + " = " + elT.value);
                 TogErr(elT);
             }
         })
@@ -53,11 +53,13 @@ window.addEventListener("load", function (Event) {
             }).then(data => {
                 for(let i=0; i<data.length; i++){
                     if (data[i].mail===E.value && data[i].password===P.value){
-                        console.log(data[i].idUnt);
                         trovato=true;
                         let t= generaToken(data[i].idUnt);
-                        generaFileLocale(t);
-                        /*open("Index.html?tk="+t+"unt="+data[i].idUnt,"_self")*/
+                        setCookie("token",t,15,"/");            //------- genero cookie temporaneo per il login --------
+                        setCookie("idUtn",data[i].idUnt,15);
+
+                        //open("Index.html",'_self');
+
                         break;
                     }else{
                         console.log("non trovato")
@@ -109,7 +111,10 @@ window.addEventListener("load", function (Event) {
                 tok = data.token;
                 ip = data.ip;
                 last= data.lastLog;
-
+                let currentdate = new Date();
+                console.log (currentdate)
+                let datetime =  currentdate.getFullYear() + "-" + (currentdate.getMonth()+1) + "-" + currentdate.getDate() + " "+ currentdate.getHours() + ":"+ currentdate.getMinutes() + ":" + currentdate.getSeconds();
+                console.log("-"+datetime+"-")
                 urlip = "http://api.db-ip.com/v2/free/self"
                 fetch(urlip, {
                     method: "GET"
@@ -127,7 +132,8 @@ window.addEventListener("load", function (Event) {
                     password: pas,
                     token: tk,
                     ip: ipAddress,
-                    lastLog: 
+                    //lastLog: currentdate.toISOString()
+                    lastLog: datetime
                     }
 
                     let urlApi = "http://"+host+":8080/api/update-utenti";
@@ -147,10 +153,3 @@ window.addEventListener("load", function (Event) {
             });
         }
 
-        function generaFileLocale(tk){
-            let filename = "C:/tk.txt";
-            let fso = new ActiveXObject("Scripting.FileSystemObject");
-            let file = fso.CreateTextFile(filename, true);
-            file.WriteLine(tk);
-            file.Close();
-        }
