@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -40,6 +41,10 @@ public class Utenti {
 
     @Column (name = "ip")
     private String ip;
+
+    @Temporal(TemporalType.DATE)
+    @Column (name = "lastLog")
+    private Date lastLog;
 
     @OneToMany (mappedBy = "unt")
     @JsonIgnore

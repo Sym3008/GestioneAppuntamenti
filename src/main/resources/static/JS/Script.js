@@ -1,6 +1,5 @@
 let host="localhost"
 
-
 window.addEventListener("load", function (Event) {
     let form = document.querySelector('#login')
     form.addEventListener('submit',function (event){
@@ -11,9 +10,9 @@ window.addEventListener("load", function (Event) {
                 console.log("-> " + elT.id + " = NON E' PRESENTE!!");
                 formValido = false;
                 InErr(elT,elT.id);
-            event.preventDefault();
+                event.preventDefault();
             }else {
-                console.log("-> " + elT.id + " = " + elT.value);
+                //console.log("-> " + elT.id + " = " + elT.value);
                 TogErr(elT);
             }
         })
@@ -38,8 +37,8 @@ window.addEventListener("load", function (Event) {
             controllaDati();
             event.preventDefault();
         }
-            })
-        })
+    })
+})
 
         function controllaDati(){
             let E=document.querySelector('#User');
@@ -54,10 +53,13 @@ window.addEventListener("load", function (Event) {
             }).then(data => {
                 for(let i=0; i<data.length; i++){
                     if (data[i].mail===E.value && data[i].password===P.value){
-                        console.log(data[i].idUnt);
                         trovato=true;
                         let t= generaToken(data[i].idUnt);
-                        /*open("Index.html?tk="+t+"unt="+data[i].idUnt,"_self")*/
+                        setCookie("token",t,0.1,"/");
+                        setCookie("idUtn",data[i].idUnt,0.01);
+
+                        open("Index.html",'_self');
+
                         break;
                     }else{
                         console.log("non trovato")
@@ -91,6 +93,7 @@ window.addEventListener("load", function (Event) {
             let tok = '';
             let ip = '';
             let ipAddress='';
+            let last = '';
             let newRecord;
 
             let url = "http://"+host+":8080/api/get-utente/" + idUnt
@@ -107,6 +110,9 @@ window.addEventListener("load", function (Event) {
                 pas = data.password;
                 tok = data.token;
                 ip = data.ip;
+                last= data.lastLog;
+                let currentdate = new Date();
+                let datetime =  currentdate.getDay() + "/" + currentdate.getMonth() + "/" + currentdate.getFullYear() + " "+ currentdate.getHours() + ":"+ currentdate.getMinutes() + ":" + currentdate.getSeconds();
 
                 urlip = "http://api.db-ip.com/v2/free/self"
                 fetch(urlip, {
@@ -124,7 +130,8 @@ window.addEventListener("load", function (Event) {
                     cell: cel,
                     password: pas,
                     token: tk,
-                    ip: ipAddress
+                    ip: ipAddress,
+                    lastLog: datetime
                     }
 
                     let urlApi = "http://"+host+":8080/api/update-utenti";
@@ -143,3 +150,25 @@ window.addEventListener("load", function (Event) {
                 });
             });
         }
+
+       function setCookie(nome, valore, ggScadenza, path) {
+            if (path == undefined) {
+                path = "/";
+            }
+            let d = new Date();
+            d.setTime(d.getTime() + (ggScadenza * 24 * 60 * 60 * 1000));
+            let expires = "expires=" + d.toUTCString();
+            document.cookie = nome + "=" + valore + "; " + expires + "; path=" + path;
+       }
+
+       function getCookie(nome) {
+           let name = nome + "=";
+           let ca = document.cookie.split(';');
+           for (let i = 0; i < ca.length; i++) {
+               let c = ca[i];
+               while (c.charAt(0) == ' ')
+                   c = c.substring(1);
+               if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+           }
+           return "";
+       }

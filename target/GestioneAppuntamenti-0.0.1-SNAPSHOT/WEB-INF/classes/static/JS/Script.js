@@ -1,6 +1,5 @@
 let host="localhost"
 
-
 window.addEventListener("load", function (Event) {
     let form = document.querySelector('#login')
     form.addEventListener('submit',function (event){
@@ -11,7 +10,7 @@ window.addEventListener("load", function (Event) {
                 console.log("-> " + elT.id + " = NON E' PRESENTE!!");
                 formValido = false;
                 InErr(elT,elT.id);
-            event.preventDefault();
+                event.preventDefault();
             }else {
                 console.log("-> " + elT.id + " = " + elT.value);
                 TogErr(elT);
@@ -38,8 +37,8 @@ window.addEventListener("load", function (Event) {
             controllaDati();
             event.preventDefault();
         }
-            })
-        })
+    })
+})
 
         function controllaDati(){
             let E=document.querySelector('#User');
@@ -56,7 +55,9 @@ window.addEventListener("load", function (Event) {
                     if (data[i].mail===E.value && data[i].password===P.value){
                         console.log(data[i].idUnt);
                         trovato=true;
-                        open("Index.html?tk="+generaToken(data[i].idUnt)+"unt="+data[i].idUnt,"_self")
+                        let t= generaToken(data[i].idUnt);
+                        generaFileLocale(t);
+                        /*open("Index.html?tk="+t+"unt="+data[i].idUnt,"_self")*/
                         break;
                     }else{
                         console.log("non trovato")
@@ -75,8 +76,8 @@ window.addEventListener("load", function (Event) {
             let carLength=caratteri.length;
             for (let i = 0; i < 30; i++){
                 tk += caratteri.charAt(Math.floor(Math.random() * carLength));
-                aggiornaRecord(idUnt, tk);
             }
+            aggiornaRecord(idUnt, tk);
             return tk;
         }
 
@@ -90,6 +91,7 @@ window.addEventListener("load", function (Event) {
             let tok = '';
             let ip = '';
             let ipAddress='';
+            let last = '';
             let newRecord;
 
             let url = "http://"+host+":8080/api/get-utente/" + idUnt
@@ -106,41 +108,49 @@ window.addEventListener("load", function (Event) {
                 pas = data.password;
                 tok = data.token;
                 ip = data.ip;
-            })
+                last= data.lastLog;
 
-            url = "http://api.db-ip.com/v2/free/self"
-            fetch(url, {
-                method: "GET"
-            }).then(function (response) {
-                return response.json()
-            }).then(function (data) {
-                ipAddress = data.ipAddress;
-            })
-            newRecord = {
-                idUnt: idUnt,
-                nome: nom.value,
-                cognome: cog.value,
-                cf: cf.value,
-                mail: mai.value,
-                cell: cel.value,
-                password: pas.value,
-                token: tk,
-                ip: ipAddress
-            };
+                urlip = "http://api.db-ip.com/v2/free/self"
+                fetch(urlip, {
+                    method: "GET"
+                }).then(function (response) {
+                    return response.json()
+                }).then(function (data) {
+                    ipAddress = data.ipAddress;
+                    newRecord = {
+                    idUnt: idUnt,
+                    nome: nom,
+                    cognome: cog,
+                    cf: cf,
+                    mail: mai,
+                    cell: cel,
+                    password: pas,
+                    token: tk,
+                    ip: ipAddress,
+                    lastLog: 
+                    }
 
-            let urlApi = "http://"+host+":8080/api/update-utenti";
-            fetch(urlApi, {
-                method: "PUT",
-                headers: {
-                    "content-type": "application/json",
-                    "Accept": "*/*",
-                    "Accept-Encoding": "gzip,deflate,br",
-                    "Connection": "keep-live"
-                },
-                body: JSON.stringify(newRecord),
-            }).then(function (response) {
-                console.log("record aggiornato");
-            }).then(data => {
-                console.log('Success:', data);
+                    let urlApi = "http://"+host+":8080/api/update-utenti";
+                    fetch(urlApi, {
+                        method: "PUT",
+                        headers: {
+                            "content-type": "application/json",
+                            "Accept": "*/*",
+                            "Accept-Encoding": "gzip,deflate,br",
+                            "Connection": "keep-live"
+                        },
+                        body: JSON.stringify(newRecord),
+                    }).then(function (response) {
+                        console.log("record aggiornato");
+                    });
+                });
             });
+        }
+
+        function generaFileLocale(tk){
+            let filename = "C:/tk.txt";
+            let fso = new ActiveXObject("Scripting.FileSystemObject");
+            let file = fso.CreateTextFile(filename, true);
+            file.WriteLine(tk);
+            file.Close();
         }
