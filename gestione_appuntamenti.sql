@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Ott 10, 2022 alle 11:20
+-- Creato il: Nov 07, 2022 alle 13:16
 -- Versione del server: 10.4.24-MariaDB
 -- Versione PHP: 8.1.6
 
@@ -20,6 +20,24 @@ SET time_zone = "+00:00";
 --
 -- Database: `gestione_appuntamenti`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struttura stand-in per le viste `all_pre_conf`
+-- (Vedi sotto per la vista effettiva)
+--
+CREATE TABLE `all_pre_conf` (
+`id_pren` int(11)
+,`nome` varchar(30)
+,`cognome` varchar(30)
+,`cf` varchar(16)
+,`mail` varchar(50)
+,`cell` int(11)
+,`data` date
+,`ora` time
+,`descrizione_uff` varchar(30)
+);
 
 -- --------------------------------------------------------
 
@@ -88,7 +106,8 @@ CREATE TABLE `planner` (
 --
 
 INSERT INTO `planner` (`id_planner`, `id_uff`, `data_inizio`, `data_fine`, `n_pre_ora`, `id_sett`) VALUES
-(1, 1, '2022-10-01', NULL, 3, 1);
+(1, 1, '2022-10-01', NULL, 3, 1),
+(2, 2, '2022-07-31', NULL, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -104,6 +123,16 @@ CREATE TABLE `prenotazioni` (
   `ora` time NOT NULL,
   `confermato` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dump dei dati per la tabella `prenotazioni`
+--
+
+INSERT INTO `prenotazioni` (`id_pren`, `id_planner`, `id_utn`, `data`, `ora`, `confermato`) VALUES
+(1, 1, 1, '2022-10-02', '11:00:00', 1),
+(2, 2, 1, '2022-08-02', '10:00:00', 1),
+(3, 2, 2, '2022-10-18', '12:00:00', 0),
+(4, 2, 2, '2022-10-15', '13:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -137,15 +166,15 @@ INSERT INTO `settimane` (`id_sett`, `lun`, `mar`, `mer`, `gio`, `ven`, `sab`, `d
 
 CREATE TABLE `uffici` (
   `id_uff` int(11) NOT NULL,
-  `descrizione` varchar(30) NOT NULL,
-  `riferimento` varchar(30) DEFAULT NULL
+  `descrizione_uff` varchar(30) NOT NULL,
+  `riferimento_uff` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dump dei dati per la tabella `uffici`
 --
 
-INSERT INTO `uffici` (`id_uff`, `descrizione`, `riferimento`) VALUES
+INSERT INTO `uffici` (`id_uff`, `descrizione_uff`, `riferimento_uff`) VALUES
 (1, 'Ufficio 1', 'sym'),
 (2, 'Ufficio2', NULL);
 
@@ -161,16 +190,29 @@ CREATE TABLE `utenti` (
   `cognome` varchar(30) NOT NULL,
   `cf` varchar(16) NOT NULL,
   `mail` varchar(50) NOT NULL,
-  `cell` int(11) NOT NULL
+  `cell` int(11) DEFAULT NULL,
+  `password` varchar(50) NOT NULL,
+  `token` varchar(30) DEFAULT NULL,
+  `ip` varchar(15) DEFAULT NULL,
+  `last_log` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dump dei dati per la tabella `utenti`
 --
 
-INSERT INTO `utenti` (`id_utn`, `nome`, `cognome`, `cf`, `mail`, `cell`) VALUES
-(1, 'Simone', 'Castelluccio', 'asdfasdfasdfasdf', 'fdas@dasf.it', 12345123),
-(2, 'Persona', 'Uno', 'iuopuiopuiopuip', 'ujdsa@dfsa.it', 8549672);
+INSERT INTO `utenti` (`id_utn`, `nome`, `cognome`, `cf`, `mail`, `cell`, `password`, `token`, `ip`, `last_log`) VALUES
+(1, 'Simone', 'Castelluccio', 'CodiceFiscaleSim', 'a@a.a', 154651313, '123', 'ST4ygNP/e5!H8745%P%KHFDf5niQ8l', '2.229.21.58', '2022-11-07 12:10:18'),
+(2, 'Persona', 'Uno', 'CodiceFiscalePer', 'b@b.b', 8549672, 'asdf', NULL, NULL, '2022-11-03 23:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura per vista `all_pre_conf`
+--
+DROP TABLE IF EXISTS `all_pre_conf`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `all_pre_conf`  AS SELECT `prenotazioni`.`id_pren` AS `id_pren`, `utenti`.`nome` AS `nome`, `utenti`.`cognome` AS `cognome`, `utenti`.`cf` AS `cf`, `utenti`.`mail` AS `mail`, `utenti`.`cell` AS `cell`, `prenotazioni`.`data` AS `data`, `prenotazioni`.`ora` AS `ora`, `uffici`.`descrizione_uff` AS `descrizione_uff` FROM (((`prenotazioni` join `utenti` on(`prenotazioni`.`id_utn` = `utenti`.`id_utn`)) join `planner` on(`prenotazioni`.`id_planner` = `planner`.`id_planner`)) join `uffici` on(`planner`.`id_uff` = `uffici`.`id_uff`)) WHERE `prenotazioni`.`confermato` = '1''1'  ;
 
 --
 -- Indici per le tabelle scaricate
@@ -250,13 +292,13 @@ ALTER TABLE `giorni`
 -- AUTO_INCREMENT per la tabella `planner`
 --
 ALTER TABLE `planner`
-  MODIFY `id_planner` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_planner` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT per la tabella `prenotazioni`
 --
 ALTER TABLE `prenotazioni`
-  MODIFY `id_pren` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pren` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT per la tabella `settimane`
