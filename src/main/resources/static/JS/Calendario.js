@@ -20,7 +20,22 @@ window.addEventListener("load", function (Event) {
     console.log("---> "+diffInDays);
 
     -------------------------------------------------------------------------------------------*/
-
+    let idU = getCookie("idUtn");
+    if (idU>0){
+        let url = "http://"+host+":8080/api/get-utente/" + idU
+        fetch(url, {
+            method: "GET"
+        }).then(function (response) {
+            return response.json()
+        }).then(function (data) {
+            let a = document.createElement("a");
+            a.innerHTML = data.nome;
+            a.classList.add('btn-form');
+            let d = document.querySelector("#login")
+            d.innerHTML='';
+            d.appendChild(a);
+        })
+    }
 })
 
 var mese = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Decembre"];

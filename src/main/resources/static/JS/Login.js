@@ -1,5 +1,3 @@
-let host="localhost"
-
 window.addEventListener("load", function (Event) {
     let form = document.querySelector('#login')
     form.addEventListener('submit',function (event){
@@ -54,12 +52,10 @@ window.addEventListener("load", function (Event) {
                 for(let i=0; i<data.length; i++){
                     if (data[i].mail===E.value && data[i].password===P.value){
                         trovato=true;
-                        let t= generaToken(data[i].idUnt);
+                        let t= generaToken();
                         setCookie("token",t,15,"/");            //------- genero cookie temporaneo per il login --------
                         setCookie("idUtn",data[i].idUnt,15);
-
-                        open("Index.html",'_self');
-
+                        aggiornaRecord(data[i].idUnt, t);
                         break;
                     }else{
                         console.log("non trovato")
@@ -72,14 +68,13 @@ window.addEventListener("load", function (Event) {
             });
         }
 
-        function generaToken(idUnt){
+        function generaToken(){
             let tk="";
             let caratteri="1234567890QAZWSXEDCRFVTGBYHNUJMIKOLPqazwsxedcrfvtgbyhnujmikolp!£$%&/()?";
             let carLength=caratteri.length;
             for (let i = 0; i < 30; i++){
                 tk += caratteri.charAt(Math.floor(Math.random() * carLength));
             }
-            aggiornaRecord(idUnt, tk);
             return tk;
         }
 
@@ -144,6 +139,7 @@ window.addEventListener("load", function (Event) {
                         body: JSON.stringify(newRecord),
                     }).then(function (response) {
                         console.log("record aggiornato");
+                        open("Index.html",'_self');
                     });
                 });
             });
