@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link href="../static/CSS/bootstrap-5.1.3-dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link rel="icon" href="../static/IMG/logo.png">
+    <link rel="stylesheet" type="text/css" href="../static/css/Style.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/NewUtn.css"/>
+    <link href="../static/CSS/bootstrap-5.1.3-dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <meta charset="UTF-8">
+    <title>Registrazione Utente</title>
+</head>
+<body>
+
+<div class="d-flex justify-content-center align-items-center">
+    <div class="container home ">
+        <!-- Intestazione responsitive dal tablet -->
+        <div class="row p0">
+            <nav class="px-md-5 hero d-flex flex-column flex-md-row justify-content-between align-items-center" >
+
+            </nav>
+        </div>
+        <!-- Corpo responsitive dal tablet -->
+        <div class="row">
+            <div class="col-md-10 offset-md-1 text-col">
+                <div class="aling-c">
+                    <h3> Registrazione Nuovo Utente </h3>
+                </div>
+                <form id="registrationForm" method="post">
+                    <div class="d-flex flex-column flex-md-row justify-content-start align-items-start">
+                        <div class="boxIn col-12 col-md-6">
+                            <div>
+                                <label for="Nome" class="fw-bold"> Nome * </label>
+                            </div>
+                            <div>
+                                <input class="border-dark textInput richiesto" id="Nome" type="text"
+                                       name="firstname" placeholder="Inserisci il tuo nome">
+                            </div>
+                            <div class="messErr p-0">                            </div>
+                        </div>
+                        <div class="boxIn col-12 col-md-6">
+                            <div>
+                                <label for="Cognome" class="fw-bold "> Cognome * </label>
+                            </div>
+                            <div>
+                                <input class=" border-dark textInput richiesto" id="Cognome" type="text"
+                                       name="firstname" placeholder="Inserisci il tuo cognome">
+                            </div>
+                            <div class="messErr p0">                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row justify-content-start align-items-start">
+                        <div class="boxIn col-12 col-md-6">
+                            <div>
+                                <label for="Telefono" class="fw-bold">Telefono * </label>
+                            </div>
+                            <div>
+                                <input class="border-dark textInput richiesto" id="Telefono" type="text"
+                                       placeholder="Inserisci il tuo numero di telefono">
+                            </div>
+                            <div class="messErr p0">                            </div>
+                        </div>
+                        <div class="boxIn col-12 col-md-6">
+                            <div>
+                                <label for="CodiceFiscale" class="fw-bold "> Codice-fiscale * </label>
+                            </div>
+                            <div>
+                                <input class="border-dark textInput richiesto" id="CodiceFiscale" type="text" maxlength="16"
+                                       placeholder="Inserisci il tuo codice fiscale">
+                            </div>
+                            <div class="messErr p0">                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row justify-content-start align-items-start">
+                        <div class="boxIn col-12 col-md-6">
+                            <div>
+                                <label for="Email" class="fw-bold "> Email * </label>
+                            </div>
+                            <div>
+                                <input class="border-dark textInput richiesto" id="Email" type="email"
+                                       placeholder="Inserisci la tua mail">
+                            </div>
+                            <div class="messErr p0">                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row justify-content-start align-items-start">
+                        <div class="boxIn col-12 col-md-6">
+                            <div>
+                                <label for="Password" class="fw-bold"> Password * </label>
+                            </div>
+                            <div>
+                                <input class="border-dark textInput richiesto" id="Password" type="password"
+                                       placeholder="Inserisci una password">
+                            </div>
+                            <div class="messErr p0">                            </div>
+                        </div>
+                        <div class="boxIn col-12 col-md-6">
+                            <div>
+                                <label for="Conferma-Password" class="fw-bold"> Conferma Password * </label>
+                            </div>
+                            <div>
+                                <input class="border-dark textInput richiesto" id="Conferma-Password"
+                                       type="password" placeholder="Conferma la password inserita">
+                            </div>
+                            <div class="messErr p0">                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-2">
+                        * I campi indicati sono obbligatori. Ti chiediamo di compilarli per poterti offrire un servizio
+                        migliore.
+                    </div>
+                    <div class="mt-4 aling-c">
+                        <button class="btn-form px-1 py-3 ms-auto mt-2 col-4" id="Registrati" type="submit"
+                                value="submit"> Registrati
+                        </button>
+                    </div>
+                    <div class="mt-2 aling-c fw-bold">
+                        <a href="Login.html">Annulla</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <footer class="footer mt-5 p0 d-flex flex-row justify-content-between align-items-center">
+            <div class="p-0">
+                Fastbook © 2020
+            </div>
+            <div class="p-0 d-flex flex-row justify-content-end align-items-center">
+                <span>About</span>
+                <span>FAQ</span>
+                <span>Terms & Conditions</span>
+                <span>Privacy Policy</span>
+            </div>
+        </footer>
+    </div>
+</div>
+<script src="../static/JS/PropertiesJS.js"></script>
+<script src="../static/js/NewUtn.js"></script>
+</body>
+</html>

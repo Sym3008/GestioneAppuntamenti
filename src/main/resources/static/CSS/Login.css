@@ -37,4 +37,7 @@ input{
     margin: 10px 5px;
 }
 
-
+a{
+    font-size: 0.6rem;
+    letter-spacing: 0.22em;
+}

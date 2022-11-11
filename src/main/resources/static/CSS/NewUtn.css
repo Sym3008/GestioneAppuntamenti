@@ -1,0 +1,40 @@
+.aling-c{
+    text-align: center;
+}
+.text-col{
+    --bs-text-opacity: 1;
+    color: #c18e70!important;
+}
+form input{
+    width: 100%;
+    text-align: left;
+    font-size: large;
+    border: 1px solid;
+    height: 45px;
+    padding: 15px;
+}
+form select{
+    width: 100%;
+    text-align: left;
+    height: 45px;
+}
+form label{
+    width: 100%;
+    text-align: left;
+    font-size: 20px;
+}
+form div{
+    padding: 1px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+#Registrati{
+    max-width: 300px;
+    max-height: 100px;
+    color: white;
+    font-family: "Helvetica Neue", sans-serif;
+}
+a{
+    font-size: 0.6rem;
+    letter-spacing: 0.22em;
+}
